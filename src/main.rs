@@ -1,29 +1,30 @@
+use std::time::{SystemTime, UNIX_EPOCH};
+
 use data_structure::linear_search;
-use testing::Student;
+use util::ArrayGenerator;
 
 pub mod data_structure;
 pub mod testing;
+pub mod util;
 
 fn main() {
-    let data = [25, 22, 123, 4214, 34523, 12, 321, 2];
-    let res = linear_search::search(&data, 10);
+    let data_size = [1000000, 10000000];
 
-    println!("linearSearch res is {res}");
+    for n in data_size {
+        let data = ArrayGenerator::generator_ordered_array(n);
+        let start_time = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("Failed to get timestamp")
+            .as_secs_f64();
+        for _ in 0..100 {
+            linear_search::search(&data, n);
+        }
+        let end_time = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("Failed to get timestamp")
+            .as_secs_f64();
 
-    let student = [
-        Student {
-            name: "xing".to_string(),
-        },
-        Student {
-            name: "guang".to_string(),
-        },
-    ];
-
-    let xing = Student {
-        name: "Xing".to_string(),
-    };
-
-    let res1 = linear_search::search(&student, xing);
-
-    println!("{res1}");
+        let time = end_time - start_time;
+        println!("n = {n}, 100 runs: {time} s")
+    }
 }
