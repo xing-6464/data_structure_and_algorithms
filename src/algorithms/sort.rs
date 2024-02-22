@@ -1,4 +1,4 @@
-pub fn selection_sort(arr: &mut [isize]) {
+pub fn selection_sort<T: std::cmp::PartialOrd>(arr: &mut [T]) {
     for i in 0..arr.len() {
         let mut min_index = i;
         for j in i..arr.len() {
