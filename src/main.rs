@@ -36,4 +36,23 @@ fn main() {
     for (i, v) in arr.iter().enumerate() {
         println!("{i} : {v}");
     }
+
+    let mut student1 = [
+        testing::Student {
+            name: String::from("guang"),
+            score: 100,
+        },
+        testing::Student {
+            name: String::from("xing"),
+            score: 90,
+        },
+        testing::Student {
+            name: String::from("Bobo"),
+            score: 80,
+        },
+    ];
+    sort::selection_sort(&mut student1);
+    for student in student1 {
+        println!("{student} ")
+    }
 }
