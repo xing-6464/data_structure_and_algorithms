@@ -1,13 +1,16 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 // use algorithms::search::linear_search;
-use algorithms::sort;
+use algorithms::sort::Sort;
+use utils::ArrayGenerator;
+
+use crate::utils::SortingHelper;
 
 // use util::ArrayGenerator;
 
-pub mod algorithms;
-pub mod testing;
-pub mod util;
+mod algorithms;
+mod testing;
+mod utils;
 
 fn main() {
     // let data_size = [1000000, 10000000];
@@ -32,7 +35,7 @@ fn main() {
 
     let mut arr = [1, 4, 2, 3, 6, 5];
 
-    sort::selection_sort(&mut arr);
+    Sort::selection_sort(&mut arr);
     for (i, v) in arr.iter().enumerate() {
         println!("{i} : {v}");
     }
@@ -51,8 +54,14 @@ fn main() {
             score: 80,
         },
     ];
-    sort::selection_sort(&mut student1);
+    Sort::selection_sort(&mut student1);
     for student in student1 {
         println!("{student} ")
+    }
+
+    let data_size = [10000, 100000];
+    for n in data_size {
+        let mut arr = ArrayGenerator::generate_random_array(n, n);
+        SortingHelper::sortTest("selection_sort", &mut arr);
     }
 }
