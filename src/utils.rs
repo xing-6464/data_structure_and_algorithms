@@ -8,7 +8,7 @@ pub struct ArrayGenerator;
 pub struct SortingHelper;
 
 impl ArrayGenerator {
-    pub fn generator_ordered_array(n: isize) -> Vec<isize> {
+    pub fn generator_ordered_array(n: i32) -> Vec<i32> {
         let mut res_array = Vec::new();
 
         for i in 0..n {
@@ -29,7 +29,7 @@ impl ArrayGenerator {
 }
 
 impl SortingHelper {
-    pub fn isSorted<T: PartialOrd>(arr: &[T]) -> bool {
+    pub fn is_sorted<T: PartialOrd>(arr: &[T]) -> bool {
         for i in 1..arr.len() {
             if arr[i-1] > arr[i] {
                 return false;
@@ -38,18 +38,19 @@ impl SortingHelper {
         true
     }
 
-    pub fn sortTest<T: PartialOrd>(sort_name: &str, arr: &mut [T]) {
+    pub fn sort_test<T: PartialOrd>(sort_name: &str, arr: &mut [T]) {
 
         let start_time = SystemTime::now().duration_since(UNIX_EPOCH).expect("failed to get timestamp").as_secs_f64();
         match sort_name {
             "selection_sort" => Sort::selection_sort(arr),
+            "insertion_sort" => Sort::insertion_sort(arr),
             _ => unreachable!()
         }
         let end_time = SystemTime::now().duration_since(UNIX_EPOCH).expect("failed to get timestamp").as_secs_f64();
 
         let time = end_time - start_time;
 
-        if !SortingHelper::isSorted(arr) {
+        if !SortingHelper::is_sorted(arr) {
             panic!("{} failed", sort_name);
         }
 
